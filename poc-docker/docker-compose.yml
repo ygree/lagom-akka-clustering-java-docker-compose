@@ -1,0 +1,30 @@
+---
+version: '3'
+services:
+  abc-1:
+    image: abc-impl:1.0-SNAPSHOT
+    networks:
+      - abc-network-name
+    hostname: abc-1
+    ports:
+      - "12038:9000"
+#      - "11240:2552"
+    environment:
+      APPLICATION_SECRET: "sahoiewhoifhvzoihaeogiweorj3232fwe"
+      SEED_NODES_0: "akka.tcp://application@abc-1:2552"
+      SEED_NODES_1: "akka.tcp://application@abc-2:2552"
+  abc-2:
+    image: abc-impl:1.0-SNAPSHOT
+    networks:
+      - abc-network-name
+    hostname: abc-2
+    ports:
+      - "12039:9000"
+#      - "11241:2552"
+    environment:
+      APPLICATION_SECRET: "sahoiewhoifhvzoihaeogiweorj3232fwe"
+      SEED_NODES_0: "akka.tcp://application@abc-1:2552"
+      SEED_NODES_1: "akka.tcp://application@abc-2:2552"
+
+networks:
+  abc-network-name:
