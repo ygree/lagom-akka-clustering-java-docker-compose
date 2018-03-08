@@ -35,8 +35,9 @@ services:
 #      - "11241:2552"
     environment:
       APPLICATION_SECRET: "sahoiewhoifhvzoihaeogiweorj3232fwe"
-#      SEED_NODES_0: "akka.tcp://application@abc-1:2552"
-#      SEED_NODES_1: "akka.tcp://application@abc-2:2552"
+      HELLO_SERVICE_0: "http://abc-1:9000"
+      HELLO_SERVICE_1: "http://abc-2:9000"
+#      HELLO_SERVICES: "http://abc-1:9000"
 
 networks:
   abc-network-name:

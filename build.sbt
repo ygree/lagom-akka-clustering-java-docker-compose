@@ -51,15 +51,16 @@ lazy val `xyz-impl` = (project in file("xyz-impl"))
     libraryDependencies ++= Seq(
       lagomLogback,
       lagomJavadslTestKit,
-      lagomJavadslCluster,
-      lombok,
-      `akka-cluster-tools`
+      lagomJavadslApi,
+//      lagomJavadslClient,
+//      lagomJavadslCluster,
+      lombok
+//      `akka-cluster-tools`
     ),
     lagomServiceLocatorEnabled in ThisBuild := false
   )
   .settings(lagomForkedTestSettings: _*)
-  .dependsOn(`abc-api`)
-  .dependsOn(`xyz-api`)
+  .dependsOn(`xyz-api`, `abc-api`)
 
 val akkaVersion = "2.5.11"
 val lombok = "org.projectlombok" % "lombok" % "1.16.18"

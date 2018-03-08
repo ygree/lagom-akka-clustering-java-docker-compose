@@ -1,5 +1,6 @@
 package com.example.hello.impl;
 
+import com.example.hello.api.HelloService;
 import com.example.hello.api.XyzService;
 import com.google.inject.AbstractModule;
 import com.lightbend.lagom.javadsl.api.ServiceLocator;
@@ -23,6 +24,7 @@ public class XyzModule extends AbstractModule implements ServiceGuiceSupport {
     @Override
     protected void configure() {
         bindService(XyzService.class, XyzServiceImpl.class);
+        bindClient(HelloService.class);
 
         if (environment.isProd()) {
             bind(ServiceLocator.class).to(ConfigurationServiceLocator.class);

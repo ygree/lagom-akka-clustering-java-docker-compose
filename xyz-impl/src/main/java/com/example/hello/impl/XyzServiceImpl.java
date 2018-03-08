@@ -2,6 +2,7 @@ package com.example.hello.impl;
 
 import akka.NotUsed;
 import akka.actor.ActorSystem;
+import com.example.hello.api.HelloService;
 import com.example.hello.api.XyzService;
 import com.lightbend.lagom.javadsl.api.ServiceCall;
 
@@ -13,16 +14,19 @@ import java.util.concurrent.CompletableFuture;
  */
 public class XyzServiceImpl implements XyzService {
 
+    private final HelloService abcService;
 
     @Inject
-    public XyzServiceImpl(ActorSystem system) {
-
+    public XyzServiceImpl(HelloService abcService) {
+        this.abcService = abcService;
     }
 
     @Override
     public ServiceCall<NotUsed, String> hello(String id) {
+
         return request -> {
-            return CompletableFuture.completedFuture("Hello!");
+            return abcService.hello(id).invoke().thenApply(m -> m.message + "*");
+//            return CompletableFuture.completedFuture("Hello!");
         };
     }
 
