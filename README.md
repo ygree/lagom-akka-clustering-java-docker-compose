@@ -7,8 +7,12 @@ Run services:
 `cd poc-docker`
 `docker-compose up`
 
-Send request:
+Send request abc service:
 ```
 curl -i http://localhost:12038/api/hello/John
 ```
 
+Send request xyz service:
+```
+curl -i http://localhost:12143/api/hello/John
+```

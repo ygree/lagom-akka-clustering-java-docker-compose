@@ -25,6 +25,18 @@ services:
       APPLICATION_SECRET: "sahoiewhoifhvzoihaeogiweorj3232fwe"
       SEED_NODES_0: "akka.tcp://application@abc-1:2552"
       SEED_NODES_1: "akka.tcp://application@abc-2:2552"
+  xyz-1:
+    image: xyz-impl:1.0-SNAPSHOT
+    networks:
+      - abc-network-name
+    hostname: xyz-1
+    ports:
+      - "12143:9000"
+#      - "11241:2552"
+    environment:
+      APPLICATION_SECRET: "sahoiewhoifhvzoihaeogiweorj3232fwe"
+#      SEED_NODES_0: "akka.tcp://application@abc-1:2552"
+#      SEED_NODES_1: "akka.tcp://application@abc-2:2552"
 
 networks:
   abc-network-name:

@@ -5,7 +5,10 @@ version in ThisBuild := "1.0-SNAPSHOT"
 scalaVersion in ThisBuild := "2.12.4"
 
 lazy val `hello` = (project in file("."))
-  .aggregate(`abc-api`, `abc-impl`)
+  .aggregate(
+    `abc-api`, `abc-impl`,
+    `xyz-api`, `xyz-impl`
+  )
 
 lazy val `abc-api` = (project in file("abc-api"))
   .settings(common: _*)
@@ -31,6 +34,32 @@ lazy val `abc-impl` = (project in file("abc-impl"))
   )
   .settings(lagomForkedTestSettings: _*)
   .dependsOn(`abc-api`)
+
+lazy val `xyz-api` = (project in file("xyz-api"))
+  .settings(common: _*)
+  .settings(
+    libraryDependencies ++= Seq(
+      lagomJavadslApi,
+      lombok
+    )
+  )
+
+lazy val `xyz-impl` = (project in file("xyz-impl"))
+  .enablePlugins(LagomJava)
+  .settings(common: _*)
+  .settings(
+    libraryDependencies ++= Seq(
+      lagomLogback,
+      lagomJavadslTestKit,
+      lagomJavadslCluster,
+      lombok,
+      `akka-cluster-tools`
+    ),
+    lagomServiceLocatorEnabled in ThisBuild := false
+  )
+  .settings(lagomForkedTestSettings: _*)
+  .dependsOn(`abc-api`)
+  .dependsOn(`xyz-api`)
 
 val akkaVersion = "2.5.11"
 val lombok = "org.projectlombok" % "lombok" % "1.16.18"
